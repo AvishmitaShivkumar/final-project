@@ -16,7 +16,7 @@ const handleSignIn = async (request, response) => {
 
     // checks that the email and password are not empty.
     if(!email || !password) {
-        return response.status(400).json({status: 400, message: "Missing information"})
+        return response.status(400).json({status: 400, error: "Missing information"})
     }
 
     // create a new Mongodb client
@@ -31,21 +31,21 @@ const handleSignIn = async (request, response) => {
         const foundUser = await db.collection("auth").findOne({ _id: email });
 
         if (!foundUser) {
-            return response.status(404).json({status: 404, message: `${email} does not have an account 1`})
+            return response.status(404).json({status: 404, error: `${email} does not have an account. Please sign up.`})
         }; 
 
         // uses bcrypt to compare user entered password against the encrypted one in collection
         const matchingPassword = await bcrypt.compare(password, foundUser.password);
 
         if (!matchingPassword) {
-            return response.status(401).json({status: 401 , message:"Incorrect password"})
+            return response.status(401).json({status: 401 , error:"Incorrect password"})
         };
 
         // finds the matching user account by email as id in the accounts collection.
         const foundAccount = await db.collection("accounts").findOne({ _id: email });
 
         if (!foundAccount) {
-            return response.status(404).json({status: 404, message: `${email} does not have an account`})
+            return response.status(404).json({status: 404, error: `${email} does not have an account. Please sign up to create an account.`})
         }; 
         
         response.status(200).json({ status: 200, data: foundAccount })

@@ -17,10 +17,10 @@ const handleSignUp = async (request, response) => {
     const { name, email, password } = request.body;
     
     // checks that the required fields are not empty.
-    if (!email || !password || !name) {
+    if (!name || !email || !password) {
         return response
             .status(400)
-            .json({ status: 400, message: "Missing information" });
+            .json({ status: 400, error: "Missing information" });
     }
 
     // create a new Mongodb client
@@ -38,7 +38,7 @@ const handleSignUp = async (request, response) => {
         if (emailAlreadyInUse) {
             response
                 .status(409)
-                .json({ status: 409, message: "Email already in use" });
+                .json({ status: 409, error: "Email already in use" });
         }
 
         // encrypts the password provided by user.
@@ -47,7 +47,7 @@ const handleSignUp = async (request, response) => {
         // adds a new document to the auth collection
         await db.collection("auth").insertOne({ _id: email, email, password: hashedPassword});
         
-        // declares the body to be expected for each new account in the accounts collection.
+        // declares the body to be created for each new account in the accounts collection.
         const newAccount = { _id: email, name, email, gratitudeLog: [], meditationLog: [] };
 
         // adds a new document to the accounts collection.
@@ -61,7 +61,7 @@ const handleSignUp = async (request, response) => {
             data: newAccount,
         });
     } catch (error) {
-        response.status(500).json({ status: 500, message: error.message });
+        return response.status(500).json({ status: 500, error: error.message });
     } finally {
         client.close();
     }

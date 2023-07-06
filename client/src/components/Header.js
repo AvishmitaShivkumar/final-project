@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import { NavLink, Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
 
 const Header = () => {
-    // assigning location variable
+    const { loggedInUser } = useContext(UserContext);
+
+
+    // assigning location variable for navigation.
     const location = useLocation();
 
     // destructuring pathname from location
@@ -16,9 +21,14 @@ const Header = () => {
         <>
         <Container>
             <Title to="/">Grounded</Title>
+            {loggedInUser 
+            ? <>
+            <UserText>Welcome, {loggedInUser.name}.</UserText>
+            </>
+            : <>
             <TextContainer>
-                <p>Welcome.</p>
-                <p>Stay as long as you'd like.</p>
+                <Text>Welcome.</Text>
+                <Text>Stay as long as you'd like.</Text>
             </TextContainer>
             <SigninContainer>
                 <SigninNav className={splitLocation[1] === "signin" ? "active" : ""}>
@@ -28,6 +38,8 @@ const Header = () => {
                     <StyledLink to="/signup">SIGN UP</StyledLink>
                 </SigninNav>
             </SigninContainer>
+            </>
+            }
         </Container>
         </>
     )
@@ -46,13 +58,19 @@ font-family: var(--header-font-family);
 margin: 1rem;
 text-decoration: none;
 `
+const Text = styled.p`
+margin: 0.5rem;
+`
+const UserText = styled(Text)`
+color: var(--color-accent);
+`
 const TextContainer = styled.div`
 margin: 1rem;
 text-align: center;
 `
 const SigninContainer = styled.ul`
 display: flex;
-margin: 1rem;
+margin: 0.5rem;
 font-size: 1.1rem;
 `
 const SigninNav = styled.li`
@@ -67,5 +85,4 @@ const StyledLink = styled(Link)`
 text-decoration: none;
 color: var(--color-accent);
 `
-
 export default Header;

@@ -4,7 +4,7 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
 
 :root {
---bg-image: url(./background.png);
+--bg-image: url(/background.png);
 --header-font-family: "Allura", cursive;
 --body-font-family: "Cormorant Garamond", serif;
 --color-primary: #644F44;

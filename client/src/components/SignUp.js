@@ -33,7 +33,7 @@ const SignUp = () => {
         .then(parsed => {
             if (parsed.status === 201) {
                 setLoggedInUser(parsed.data);
-                navigate("/signup/confirmation");
+                navigate("/signupconfirmation");
             } else { 
                 setErrorMessage(parsed.error)
             }
@@ -64,7 +64,7 @@ display: flex;
 flex-direction: column;
 justify-content: space-evenly;
 align-items: center;
-background: url("./container-background.png") no-repeat center ;
+background: url("/container-background.png") no-repeat center ;
 height: 20vh;
 padding: 10vh;
 position: relative;

@@ -33,7 +33,7 @@ const SignIn = () => {
             console.log(parsed);
             if(parsed.status === 200) {
                 setLoggedInUser(parsed.data)
-                navigate("/homepage");
+                navigate("/");
             } else {
                 setErrorMessage(parsed.error);
             }

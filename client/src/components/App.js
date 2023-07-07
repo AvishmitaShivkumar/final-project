@@ -7,7 +7,6 @@ import SignUp from "./SignUp";
 import SignUpConfirmation from "./SignUpConfirmation";
 import Meditation from "./Meditation";
 import Gratitude from "./Gratitude";
-import NavComponent from "./NavComponent";
 
 
 

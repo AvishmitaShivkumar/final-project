@@ -5,6 +5,9 @@
 | -------------- | -------- | ------------------------------------------------- |----------|
 | `/api/signin` | `POST` | Securely handles signins - validates info & signs them in | handleSignIn |
 | `/api/signup` | `POST` | Adds a new user to the users collection                  | handleSignUp |
+| `/api/gratitude` | `*` | Adds a gratitude entry to the gratitude collection       | addGratitude |
+| `*` | `*` |                   |  |
+| `*` | `*` |                   |  |
 | `*` | `*` |                   |  |
 
 

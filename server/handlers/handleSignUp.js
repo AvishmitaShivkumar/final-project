@@ -63,6 +63,7 @@ const handleSignUp = async (request, response) => {
     } catch (error) {
         return response.status(500).json({ status: 500, error: error.message });
     } finally {
+        // disconnects from Mongodb
         client.close();
     }
 };

@@ -49,7 +49,7 @@ const SignUp = () => {
         <Input type="text" id="name" placeholder="Full name" onChange={(event) => handleChange(event.target.id, event.target.value)}/>
         <Input type="email" id="email" placeholder="Email" onChange={(event) => handleChange(event.target.id, event.target.value)}/>
         <Input type="password" id="password" placeholder="Password" onChange={(event) => handleChange(event.target.id, event.target.value)}/>
-        <Button>Sign up</Button>
+        <Button type="submit">Sign up</Button>
         {errorMessage &&
         <SignUpError>{errorMessage}</SignUpError>
         }

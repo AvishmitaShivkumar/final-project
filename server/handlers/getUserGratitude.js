@@ -8,28 +8,34 @@ const options = {
     useUnifiedTopology: true,
 };
 
-const handleGratitude = async (request, response) => {
-    const { date } = request.body;
+const getUserGratitude = async (request, response) => {
+    // console.log(request)
 
-    // gratitude: {date1: [{}, {gratitude: hksf}]}
-    // {date: {gratitude: ["", ""]}}
+    const accountId = request.params._id;
 
     // create a new Mongodb client
     const client = new MongoClient(MONGO_URI, options);
 
-    try {
+    try{
         // connect to the Mongodb client, declare and connect to the database
         await client.connect();
         const db = client.db("grounded");
         console.log("connected");
 
+        const userGratitudeLog = await db.collection("gratitude").findOne({ accountId })
+        // console.log(userGratitudeLog)
+
+        userGratitudeLog 
+        ? response.status(200).json({ status: 200, data: userGratitudeLog })
+        : response.status(404).json({ status: 404, error: "No entries found"})
 
     } catch (error) {
         response.status(500).json({ status: 500, error: error.message })
     } finally {
         // disconnects from Mongodb
         client.close()
+        console.log("disconnected")
     }
 };
 
-module.exports = handleGratitude;
+module.exports = getUserGratitude;

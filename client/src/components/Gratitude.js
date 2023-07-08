@@ -1,62 +1,94 @@
-import { styled } from "styled-components";
-import NavComponent from "./NavComponent";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "./UserContext";
 import moment from "moment";
-import { useState } from "react";
+import NavComponent from "./NavComponent";
+import styled from "styled-components";
 
 const Gratitude = () => {
-    const currentDate = moment()._d;
-    const formattedCurrentDate = moment(currentDate).format("D MMMM YYYY");
+const { loggedInUser } = useContext(UserContext);
+const [ gratitude, setGratitude ] = useState("");
+const [ gotGratitude, setGotGratitude ] = useState("");
 
-    const [ dailyGratitude, setDailyGratitude ] = useState("");
-    // const [ savedGratitude, setSavedGratitude ] = useState("");
+// this state is used to trigger the GET request
+const [ toGet, setToGet ] = useState(true);
 
-    const handleChange = (key, value) => {
-        setDailyGratitude({...dailyGratitude, [key]: value});
-    };
-    
-    // GET in a useEffect to retrieve all entries for the date from the collection.
+const currentDate = moment()._d;
+const formattedDate = moment(currentDate).format("D MMMM YYYY");
 
-    const handleSubmit = (event, key, value) => {
-        // prevent's form's default behaviour
-        event.preventDefault();
+// stores user input from the form in a state variable
+const handleChange = (event) => {
+    setGratitude(event.target.value)
+};
 
-        // setSavedGratitude(...savedGratitude, dailyGratitude.gratitude);
-        
+const handleSubmit = (event) => {
+    event.preventDefault();
 
-        // POST to update the gratitude collection 
-        
+    // sends the user's entry to the database
+    fetch("/api/gratitude", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ accountId: loggedInUser._id, email: loggedInUser.email, log: gratitude}),
+    })
+    .then(response => response.json())
+    .then(() => {
+        setGratitude("");
+        setToGet(!toGet)
+    })
 
-        // clears the form
-        event.target.reset();
-    
-    };
+    // clears the form 
+    event.target.reset();
+};
 
-    console.log(dailyGratitude)
-    // console.log(savedGratitude)
+// retrieves all the previous entries for the day for the logged in user.
+useEffect(() => {
+    fetch(`/api/gratitude/${loggedInUser._id}`)
+    .then(response => response.json())
+    .then(parsed => {
+        if(parsed.status === 200){
+            setGotGratitude(parsed.data.log)
+        } else {
+            setGotGratitude("")
+        }
+    })
+},[toGet]);
 
-    return(
-        <>
-        <NavComponent/>
-        <Wrapper>
-            <Flower src="/flower-transparent.png"/>
-            <GratitudeForm onSubmit={handleSubmit}>
-                <Date>{formattedCurrentDate}</Date>
-                <Label htmlFor="daily gratitude">What are you grateful for today?</Label>
-                <GratitudeInput 
-                id="gratitude" 
-                name={formattedCurrentDate}
-                placeholder="A thunderstorm breaking a heatwave. Your turn!"
-                rows={5}
-                onChange={(event) => handleChange(event.target.id, event.target.value)}
-                />
-                <Button type="submit">Save</Button>
-                {dailyGratitude &&
-            <p>{dailyGratitude.gratitude}</p>
+
+return(
+    <>
+    <NavComponent/>
+    {!loggedInUser 
+    ? <p>Please sign in or create an account.</p>
+    :
+    <Wrapper>
+        <Flower src="/flower-transparent.png"/>
+        <GratitudeForm onSubmit={handleSubmit}>
+            <Date>{formattedDate}</Date>
+            <Label htmlFor="gratitude">What are you grateful for today?</Label>
+            <GratitudeInput
+            id="gratitude"
+            rows={5}
+            onChange={handleChange}
+            />
+            <Button type="submit">Save</Button>
+            {gotGratitude &&
+                gotGratitude
+                .slice()
+                .reverse()
+                .map((log) => {
+                    return (
+                        <p key={Math.random()}>{log}</p>
+                    )
+                })
             }
-            </GratitudeForm>
-        </Wrapper>
-        </>
-    )
+        </GratitudeForm>
+    </Wrapper>
+
+    }
+    </>
+)
 };
 
 const Wrapper = styled.div`

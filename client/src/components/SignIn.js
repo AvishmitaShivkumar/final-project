@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "./UserContext";
@@ -30,7 +30,7 @@ const SignIn = () => {
     })
         .then(response => response.json())
         .then(parsed => {
-            console.log(parsed);
+            // console.log(parsed);
             if(parsed.status === 200) {
                 setLoggedInUser(parsed.data)
                 navigate("/");

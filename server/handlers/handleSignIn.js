@@ -28,7 +28,8 @@ const handleSignIn = async (request, response) => {
         const db = client.db("grounded");
 
         // finds one user with their email as id.
-        const foundUser = await db.collection("auth").findOne({ _id: email });
+        const foundUser = await db.collection("auth").findOne({ email });
+        console.log(foundUser)
 
         if (!foundUser) {
             return response.status(404).json({status: 404, error: `${email} does not have an account. Please sign up.`})
@@ -41,8 +42,8 @@ const handleSignIn = async (request, response) => {
             return response.status(401).json({status: 401 , error:"Incorrect password"})
         };
 
-        // finds the matching user account by email as id in the accounts collection.
-        const foundAccount = await db.collection("accounts").findOne({ _id: email });
+        // finds the matching user account by email in the accounts collection.
+        const foundAccount = await db.collection("accounts").findOne({ email });
 
         if (!foundAccount) {
             return response.status(404).json({status: 404, error: `${email} does not have an account. Please sign up to create an account.`})

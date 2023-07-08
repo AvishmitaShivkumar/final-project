@@ -1,6 +1,10 @@
 // for password encryption
 const bcrypt = require("bcrypt");
 
+// for unique id number
+const { v4: uuidv4 } = require("uuid");
+
+
 const { MongoClient} = require("mongodb");
 
 require("dotenv").config();
@@ -32,8 +36,11 @@ const handleSignUp = async (request, response) => {
         const db = client.db("grounded");
         console.log("connected");
 
+        // generates a random id 
+        const id = uuidv4();
+
         // checks if the email already is being used & in the collection.
-        const emailAlreadyInUse = await db.collection("auth").findOne({ _id: email });
+        const emailAlreadyInUse = await db.collection("auth").findOne({ _id: id });
 
         if (emailAlreadyInUse) {
             response
@@ -45,10 +52,10 @@ const handleSignUp = async (request, response) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // adds a new document to the auth collection
-        await db.collection("auth").insertOne({ _id: email, email, password: hashedPassword});
+        await db.collection("auth").insertOne({ _id: id, email, password: hashedPassword});
         
         // declares the body to be created for each new account in the accounts collection.
-        const newAccount = { _id: email, name, email, gratitudeLog: [], meditationLog: [] };
+        const newAccount = { _id: id, name, email, gratitudeLog: [], meditationLog: [] };
 
         // adds a new document to the accounts collection.
         await db.collection("accounts").insertOne(newAccount);

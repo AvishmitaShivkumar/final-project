@@ -3,11 +3,12 @@ const morgan = require('morgan');
 
 const handleSignIn = require('./handlers/handleSignIn');
 const handleSignUp = require('./handlers/handleSignUp');
-const getUsers = require('./handlers/getUsers');
-const handleGratitude = require('./handlers/handleGratitude');
+const addGratitude = require('./handlers/addGratitude');
+const getUserGratitude = require('./handlers/getUserGratitude');
+
 
 const app = express()
-const port = 8001
+const port = 8002
 
 app.use(morgan("tiny"))
 app.use(express.json());
@@ -17,7 +18,9 @@ app.post("/api/signin", handleSignIn)
 
 app.post("/api/signup", handleSignUp)
 
-app.post("/api/gratitude", handleGratitude)
+app.post("/api/gratitude", addGratitude)
+
+app.get("/api/gratitude/:_id", getUserGratitude)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

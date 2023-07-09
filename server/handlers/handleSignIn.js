@@ -29,7 +29,6 @@ const handleSignIn = async (request, response) => {
 
         // finds one user with their email as id.
         const foundUser = await db.collection("auth").findOne({ email });
-        console.log(foundUser)
 
         if (!foundUser) {
             return response.status(404).json({status: 404, error: `${email} does not have an account. Please sign up.`})

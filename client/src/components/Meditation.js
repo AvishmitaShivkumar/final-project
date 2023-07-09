@@ -1,12 +1,21 @@
-import NavComponent from "./NavComponent";
+import OpenTimer from "./OpenTimer";
+import PresetTimer from "./PresetTimer";
+
 
 
 const Meditation = () => {
-return (
+ 
+
+  return (
     <>
-    <NavComponent/>
+    <p>Timed Meditations</p>
+    <PresetTimer/>
+    <p>Open-Ended Meditations</p>
+    <OpenTimer/>
     </>
-)
+    
+  )
+ 
 };
 
 export default Meditation;

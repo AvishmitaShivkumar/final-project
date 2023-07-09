@@ -9,7 +9,6 @@ const options = {
 };
 
 const getUserGratitude = async (request, response) => {
-    // console.log(request)
 
     const accountId = request.params._id;
 
@@ -23,7 +22,6 @@ const getUserGratitude = async (request, response) => {
         console.log("connected");
 
         const userGratitudeLog = await db.collection("gratitude").findOne({ accountId })
-        // console.log(userGratitudeLog)
 
         userGratitudeLog 
         ? response.status(200).json({ status: 200, data: userGratitudeLog })

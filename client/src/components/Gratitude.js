@@ -6,18 +6,19 @@ import styled from "styled-components";
 
 const Gratitude = () => {
 const { loggedInUser } = useContext(UserContext);
-const [ gratitude, setGratitude ] = useState("");
+
+const currentDate = moment()._d;
+const formattedDate = moment(currentDate).format("D MMMM YYYY");
+
+const [ gratitude, setGratitude ] = useState({date: formattedDate});
 const [ gotGratitude, setGotGratitude ] = useState("");
 
 // this state is used to trigger the GET request
 const [ toGet, setToGet ] = useState(true);
 
-const currentDate = moment()._d;
-const formattedDate = moment(currentDate).format("D MMMM YYYY");
-
 // stores user input from the form in a state variable
-const handleChange = (event) => {
-    setGratitude(event.target.value)
+const handleChange = (key, value) => {
+    setGratitude({...gratitude, [key]: value});
 };
 
 const handleSubmit = (event) => {
@@ -34,7 +35,7 @@ const handleSubmit = (event) => {
     })
     .then(response => response.json())
     .then(() => {
-        setGratitude("");
+        setGratitude({date: formattedDate});
         setToGet(!toGet)
     })
 
@@ -55,7 +56,6 @@ useEffect(() => {
     })
 },[toGet]);
 
-
 return(
     <>
     <NavComponent/>
@@ -70,16 +70,20 @@ return(
             <GratitudeInput
             id="gratitude"
             rows={5}
-            onChange={handleChange}
+            onChange={(event) => handleChange(event.target.id, event.target.value)}
             />
             <Button type="submit">Save</Button>
             {gotGratitude &&
-                gotGratitude
+                gotGratitude.filter((entry) => {
+                    if(entry.date === formattedDate) {
+                        return entry
+                    }
+                })
                 .slice()
                 .reverse()
-                .map((log) => {
+                .map((entry) => {
                     return (
-                        <p key={Math.random()}>{log}</p>
+                        <p key={Math.random()}>{entry.gratitude}</p>
                     )
                 })
             }

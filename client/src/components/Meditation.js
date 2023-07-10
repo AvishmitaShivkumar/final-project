@@ -3,6 +3,7 @@ import { UserContext } from "./UserContext";
 import OpenTimer from "./OpenTimer";
 import PresetTimer from "./PresetTimer";
 import NavComponent from "./NavComponent";
+import { styled } from "styled-components";
 
 
 const Meditation = () => {
@@ -15,14 +16,18 @@ const Meditation = () => {
     ? <p>Please sign in or create an account.</p>
     : 
     <>
-      <p>Timed Meditations</p>
-      <PresetTimer/>
-      <p>Open-Ended Meditations</p>
-      <OpenTimer/>
+      <Wrapper>
+        <PresetTimer />
+        <OpenTimer/>
+      </Wrapper>
     </>
     }
     </> 
   )
 };
 
+const Wrapper = styled.div`
+display: flex;
+justify-content: space-evenly;
+`
 export default Meditation;

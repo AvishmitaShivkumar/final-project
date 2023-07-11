@@ -1,21 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import moment from "moment";
 import { keyframes, styled } from "styled-components";
+import { TimerContext } from "./TimerContext";
 
 const OpenTimer = () => {
     const { loggedInUser } = useContext(UserContext);
-
-    const [ count, setCount ] = useState(0);
-    const [ runTimer, setRunTimer ] = useState(false);
-
-    const currentDate = moment()._d;
-    const formattedDate = moment(currentDate).format("D MMMM YYYY");
+    const { count, setCount, runOpen, setRunOpen, formattedDate, secondsOpen, minutesOpen } = useContext(TimerContext);
 
     let timer;
 
     useEffect(() => {
-        if(runTimer) {
+        if(runOpen) {
             timer = setInterval(() => {
                 // callback function in the state runs the function after the state is set which allows the count to keep running.
                 setCount((count) => count + 1);
@@ -26,17 +21,19 @@ const OpenTimer = () => {
         
         return () => {
             clearInterval(timer)}
-    }, [runTimer]);
+    }, [runOpen]);
 
     // toggles the timer between "Start" and "Pause"
     const toggleTimer = () => {
-        setRunTimer(!runTimer);
+        
+        setRunOpen(!runOpen);
     };
 
     // stops the timer and resets to the last chosen time.
     const stopTimer = () => {
+        console.log("timer being set")
         setCount(0);
-        setRunTimer(false);
+        setRunOpen(false);
 
         // When user stops the timer, the time gets sent to the database.
         fetch("/api/meditation", {
@@ -45,24 +42,17 @@ const OpenTimer = () => {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ accountId: loggedInUser._id, email: loggedInUser.email, log: {date: formattedDate, meditation: `open - ${minutes}:${seconds}`}})
+            body: JSON.stringify({ accountId: loggedInUser._id, email: loggedInUser.email, log: {date: formattedDate, meditation: `open - ${minutesOpen}:${secondsOpen}`}})
         })
     };
-
-    // math to separate the count into minutes and seconds
-    const seconds = String(count % 60).padStart(2, 0);
-    const minutes = String(Math.floor(count / 60)).padStart(2, 0);
 
     return(
         <>
         <Wrapper>
-            <Circle>
-                <Display>{minutes}:{seconds} </Display>
-            </Circle>
             <p>Open-Ended Meditations</p>
             <div>
                 <Button type="button" onClick={toggleTimer}>
-                    {runTimer ? "Pause" : "Start"}
+                    {runOpen ? "Pause" : "Start"}
                 </Button>
                 <Button type="button" onClick={stopTimer}>
                     Stop
@@ -77,28 +67,6 @@ const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-margin: 2rem;
-`
-const growShrink = keyframes`
-0% { transform: scale(1) }
-50% { transform: scale(1.2) }
-100% { transform: scale(1)}
-`
-const Circle = styled.div`
-height: 20rem;
-width: 20rem;
-background-image: radial-gradient(circle, #DEDFD9, #B4BCA9 );
-border: 0.1rem solid #B4BCA9; 
-border-radius: 50%; 
-z-index: -1;
-animation: ${growShrink} 9s linear forwards infinite;
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 4rem;
-`
-const Display = styled.p`
-font-size: 4rem;
 margin: 2rem;
 `
 const Button = styled.button`

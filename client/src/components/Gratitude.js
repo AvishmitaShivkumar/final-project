@@ -3,14 +3,18 @@ import { UserContext } from "./UserContext";
 import moment from "moment";
 import NavComponent from "./NavComponent";
 import styled from "styled-components";
+import GratitudeComponent from "./GratitudeComponent";
+import { TimerContext } from "./TimerContext";
+import { v4 as uuidv4 } from 'uuid';
 
 const Gratitude = () => {
+    // generates a unique id.
+    let id = uuidv4();
+
 const { loggedInUser } = useContext(UserContext);
+const { formattedDate } = useContext(TimerContext);
 
-const currentDate = moment()._d;
-const formattedDate = moment(currentDate).format("D MMMM YYYY");
-
-const [ gratitude, setGratitude ] = useState({date: formattedDate});
+const [ gratitude, setGratitude ] = useState({date: formattedDate, id});
 const [ gotGratitude, setGotGratitude ] = useState("");
 
 // this state is used to trigger the GET request
@@ -35,7 +39,7 @@ const handleSubmit = (event) => {
     })
     .then(response => response.json())
     .then(() => {
-        setGratitude({date: formattedDate});
+        setGratitude({date: formattedDate, id});
         setToGet(!toGet)
     })
 
@@ -56,6 +60,8 @@ useEffect(() => {
     })
 },[toGet]);
 
+console.log(gotGratitude)
+
 return(
     <>
     <NavComponent/>
@@ -73,7 +79,8 @@ return(
             onChange={(event) => handleChange(event.target.id, event.target.value)}
             />
             <Button type="submit">Save</Button>
-            {gotGratitude &&
+            {
+            gotGratitude &&
                 gotGratitude.filter((entry) => {
                     if(entry.date === formattedDate) {
                         return entry
@@ -83,10 +90,13 @@ return(
                 .reverse()
                 .map((entry) => {
                     return (
-                        <p key={Math.random()}>{entry.gratitude}</p>
+                        <div key={entry.id}>
+                        <GratitudeComponent entry={entry} toGet={toGet} setToGet={setToGet} />
+                        </div>
                     )
                 })
             }
+            
         </GratitudeForm>
     </Wrapper>
 

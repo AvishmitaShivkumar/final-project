@@ -10,10 +10,10 @@ const options = {
 
 const addGratitude = async (request, response) => {
     const { accountId, email, log } = request.body;
-    
+    console.log("addGratitude gets hit");
 
     // checks that the required fields are not empty.
-    if(!log) {
+    if(!log.gratitude) {
         return response.status(400).json({ status:400, error: "Missing information" });
     }
 
@@ -37,6 +37,7 @@ const addGratitude = async (request, response) => {
 
         // if account exists, add a new value to the log field of the document.
         if(findAccount) {
+            // uses mongodb's array update operations to update the array. $push adds an item to an array.
             await db.collection("gratitude").updateOne( { accountId, email }, { $push: { log: log } } )
             return response.status(200).json({ status: 200, data: log, message: "Gratitude log updated!" })
         }

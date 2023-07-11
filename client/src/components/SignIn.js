@@ -30,7 +30,6 @@ const SignIn = () => {
     })
         .then(response => response.json())
         .then(parsed => {
-            // console.log(parsed);
             if(parsed.status === 200) {
                 setLoggedInUser(parsed.data)
                 navigate("/");

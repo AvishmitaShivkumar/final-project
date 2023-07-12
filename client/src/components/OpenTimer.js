@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import { keyframes, styled } from "styled-components";
+import  styled  from "styled-components";
 import { TimerContext } from "./TimerContext";
 
 const OpenTimer = () => {
     const { loggedInUser } = useContext(UserContext);
-    const { count, setCount, runOpen, setRunOpen, formattedDate, secondsOpen, minutesOpen } = useContext(TimerContext);
+    const { setCount, runOpen, setRunOpen, formattedDate, secondsOpen, minutesOpen } = useContext(TimerContext);
 
     let timer;
 

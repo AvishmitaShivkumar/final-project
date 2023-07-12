@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import moment from "moment";
 import NavComponent from "./NavComponent";
 import styled from "styled-components";
 import GratitudeComponent from "./GratitudeComponent";
 import { TimerContext } from "./TimerContext";
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
 const Gratitude = () => {
     // generates a unique id.
@@ -89,9 +89,9 @@ return(
             onChange={(event) => handleChange(event.target.id, event.target.value)}
             />
             <Button type="submit" onClick={handleClick}>{loading ? "Saving" : "Save"}</Button>
-            {
-            gotGratitude &&
-                gotGratitude.filter((entry) => {
+            {!gotGratitude 
+            ? <Loading/> 
+                : gotGratitude.filter((entry) => {
                     if(entry.date === formattedDate) {
                         return entry
                     }

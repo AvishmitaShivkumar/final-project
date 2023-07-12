@@ -18,7 +18,6 @@ const deleteGratitude = async (request, response) => {
          // connect to the Mongodb client, declare and connect to the database
         await client.connect();
         const db = client.db("grounded");
-        console.log("connected");
 
         await db.collection("gratitude").updateOne(
             // filters to find the value/s to be updated - accountId (finds the right account) and log.id (finds the right field).

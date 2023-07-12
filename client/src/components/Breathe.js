@@ -4,7 +4,6 @@ const Breathe = () => {
   return (
   <Wrapper>
     <Circle>
-      {/* <Text>It's loading.</Text> */}
       <p>Breathe</p>
     </Circle>
    </Wrapper>

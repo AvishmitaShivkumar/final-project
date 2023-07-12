@@ -24,7 +24,6 @@ const editGratitude = async (request, response) => {
         // connect to the Mongodb client, declare and connect to the database
         await client.connect();
         const db = client.db("grounded");
-        console.log("connected");
 
 
         // edit the pertinent value of the log field in the document.
@@ -36,7 +35,6 @@ const editGratitude = async (request, response) => {
             { $set: {"log.$.gratitude": log.gratitude } },
         )
 
-            // await db.collection("gratitude").updateOne( { accountId }, { $set: { log: log } } )
             return response.status(200).json({ status: 200, data: log, message: "Gratitude log edited!" })
 
     } catch (error) {

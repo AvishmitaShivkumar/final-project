@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import { keyframes, styled } from "styled-components";
+import  styled  from "styled-components";
 import { TimerContext } from "./TimerContext";
 
 const PresetTimer = () => {

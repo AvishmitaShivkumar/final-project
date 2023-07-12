@@ -23,15 +23,12 @@ const Meditation = () => {
     : 
     <>
       <Wrapper>
-        
-        {/* <ComponentWrapper> */}
           <PresetTimer />
           <Circle>
             <Display>
               {minutesPreset === "00" && secondsPreset === "00" ? minutesOpen : minutesPreset}:{minutesPreset === "00" && secondsPreset === "00" ? secondsOpen : secondsPreset}</Display>
           </Circle>
           <OpenTimer/>
-        {/* </ComponentWrapper> */}
       </Wrapper>
     </>
     } 
@@ -60,8 +57,7 @@ const growShrink = keyframes`
 const Circle = styled.div`
 height: 20rem;
 width: 20rem;
-background-image: radial-gradient(circle, #DEDFD9, #B4BCA9 );
-border: 0.1rem solid #B4BCA9; 
+background-image: url("/container-background.png");
 border-radius: 50%; 
 z-index: -1;
 animation: ${growShrink} 9s linear forwards infinite;
@@ -73,8 +69,5 @@ margin: 4rem;
 const Display = styled.p`
 font-size: 4rem;
 margin: 2rem;
-`
-const ComponentWrapper = styled.div`
-display: flex;
 `
 export default Meditation;

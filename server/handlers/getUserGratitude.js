@@ -19,7 +19,6 @@ const getUserGratitude = async (request, response) => {
         // connect to the Mongodb client, declare and connect to the database
         await client.connect();
         const db = client.db("grounded");
-        console.log("connected");
 
         const userGratitudeLog = await db.collection("gratitude").findOne({ accountId })
 

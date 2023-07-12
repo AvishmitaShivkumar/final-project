@@ -18,7 +18,6 @@ const addMeditation = async (request, response) => {
         // connect to the Mongodb client, declare and connect to the database
         await client.connect();
         const db = client.db("grounded");
-        console.log("connected");
 
         // checks if the account already is in the collection.
         const findAccount = await db.collection("meditation").findOne({ accountId });

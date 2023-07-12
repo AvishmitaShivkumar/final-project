@@ -26,12 +26,7 @@ const Homepage = () => {
     
     {!loggedInUser
     ? <Description>
-    <p>Grounded, very simply, offers you the chance to gain or regain some grounding.
-        {/* You'll need to create a free account and then all your meticulous progress will be saved.  */}
-        {/* Take a breath. Now, take another. Take your time here.  */}
-    </p>
-    {/* <Text>Take some time to meditate or express gratitude.</Text> */}
-    {/* <Text>Regardless of whether you choose to meditate or express gratitude, you'll hopefully leave feeling just a touch better.</Text> */}
+    <p>Grounded, very simply, gives you some help centering yourself. </p>
     <p>Please sign in or create a free account </p>
     </Description>
     :

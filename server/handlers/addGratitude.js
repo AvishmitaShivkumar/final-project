@@ -10,7 +10,6 @@ const options = {
 
 const addGratitude = async (request, response) => {
     const { accountId, email, log } = request.body;
-    console.log("addGratitude gets hit");
 
     // checks that the required fields are not empty.
     if(!log.gratitude) {
@@ -24,7 +23,6 @@ const addGratitude = async (request, response) => {
         // connect to the Mongodb client, declare and connect to the database
         await client.connect();
         const db = client.db("grounded");
-        console.log("connected");
 
         // checks if the account already is in the collection.
         const findAccount = await db.collection("gratitude").findOne({ accountId });

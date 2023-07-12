@@ -34,8 +34,7 @@ const handleSignUp = async (request, response) => {
         // connect to the Mongodb client, declare & connect to the database
         await client.connect();
         const db = client.db("grounded");
-        console.log("connected");
-
+        
         // generates a random id 
         const id = uuidv4();
 

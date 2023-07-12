@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { TimerContext } from "./TimerContext";
 import { UserContext } from "./UserContext";
 import { CiEdit } from "react-icons/ci";
-import { AiFillEdit } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
 import { CiTrash } from "react-icons/ci";
 import { styled } from "styled-components";
@@ -67,7 +66,6 @@ const GratitudeComponent = ({entry, toGet, setToGet}) => {
             <div>
                 <Button type="button" onClick={() => {setEditting(true)}}>
                     <Edit/>
-                {/* <AiFillEdit/> */}
                 </Button>
                 <Button type="button" onClick={handleDelete}><CiTrash/></Button>
             </div>
@@ -144,8 +142,5 @@ transform: translateY(0);
 const CancelButton =  styled(Button)`
 line-height: 0;
 padding: 0.35rem;
-`
-const EditButton = styled(Button)`
-border: none;
 `
 export default GratitudeComponent;

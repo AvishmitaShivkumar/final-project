@@ -1,104 +1,13 @@
-# Grounded - a meditation and gratitude space.
+# Grounded 
+A website for aiding in a meditation and gratitude practice. A MERN project. 
 
-## Endpoints
-| Endpoint       | Method   | Description                                       | Handler |
-| -------------- | -------- | ------------------------------------------------- |----------|
-| `/api/signin` | `POST` | Securely handles signins - validates info & signs them in | handleSignIn |
-| `/api/signup` | `POST` | Adds a new user to the users collection                  | handleSignUp |
-| `/api/gratitude` | `POST` | Adds a gratitude entry to the gratitude collection       | addGratitude |
-|`/api/gratitude/:_id` | `GET` | Fetches the all gratitude entries of a single user    | getUserGratitude  |
-| `/api/meditation` | `POST` | Adds a meditation entry to the meditation collection    | addMeditation |
-| `*` | `*` |                   |  |
+## About
+Grounded is a website that combines meditation timers and a gratitude log in one place. The goal was to create a website that fosters a sense of calm, helps the user center themselves and aid in their meditation and gratitude practice.
 
+## Features
+1. Users need to create an account to use the website. Password encryption is handled with bcrypt and is further protected by separating the authentication information from the user information in the database. Furthermore, gratitudes and meditation entries are stored in their own separate collections with the user's id.
 
-#### Body expected
+2. There are two types of meditation timers that can be used - an open ended timer (a stopwatch) and a countdown timer with preset times to choose from. Recode of each meditation is sent to the database upon completion.i.e on clicking the "stop" button on the open ended timer and when the timer runs out on the countdown timer. 
 
-For sign up requests (POST, handleSignUp):
+3. Gratitude entries are sent to the database when the "save" button is clicked, and are displayed on the page. Each entry can further be edited or deleted. 
 
-```json
-{
-    "_id": "<Email>",
-    "name": "<Full Name>",
-    "email": "<Email>",
-}
-```
-
-For sign in requests (POST, handleSignIn):
-
-```json
-{
-    "email": "<Email>",
-    "password": "<Password>"
-}
-```
-
-<!-- # Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->

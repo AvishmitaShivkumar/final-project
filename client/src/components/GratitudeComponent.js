@@ -14,7 +14,8 @@ const GratitudeComponent = ({entry, toGet, setToGet}) => {
     const [ editting, setEditting ] = useState(false);
     const [ replaceText, setReplaceText ] = useState({date: formattedDate, id: entry.id});
 
-    
+    const [ loading, setLoading ] = useState(false);
+
     const handleInput = (key, value) => {
         setReplaceText({...replaceText, [key]: value});
     };
@@ -22,6 +23,7 @@ const GratitudeComponent = ({entry, toGet, setToGet}) => {
     const handleSave = (event) => {
         event.preventDefault();
 
+        replaceText.gratitude && setLoading(true);
       // sends the user's entry to the database
         fetch("/api/gratitude/edit", {
             method: "PATCH",
@@ -36,7 +38,10 @@ const GratitudeComponent = ({entry, toGet, setToGet}) => {
             setEditting(false)
             setReplaceText({date: formattedDate, id: entry.id})
             setToGet(!toGet)
+            setLoading(false)
         })
+
+
     };
 
     const handleDelete = (event) => {
@@ -74,7 +79,7 @@ const GratitudeComponent = ({entry, toGet, setToGet}) => {
             placeholder="Enter your changes."
             onChange={(event) => handleInput(event.target.id, event.target.value)} />
             <Wrapper>
-                <Button type="button" onClick={handleSave}>Save</Button>
+                <Button type="button" onClick={handleSave}>{loading ? "Saving" : "Save"}</Button>
                 <CancelButton type="button" onClick={() => {setEditting(false)}}><MdCancel /></CancelButton>
             </Wrapper>
         </Wrapper>

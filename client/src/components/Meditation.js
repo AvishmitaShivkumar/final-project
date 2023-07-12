@@ -5,6 +5,7 @@ import PresetTimer from "./PresetTimer";
 import NavComponent from "./NavComponent";
 import { keyframes, styled } from "styled-components";
 import { TimerContext } from "./TimerContext";
+import { Link } from "react-router-dom";
 
 
 const Meditation = () => {
@@ -16,18 +17,21 @@ const Meditation = () => {
     <>
     <NavComponent/>
     {!loggedInUser
-    ? <p>Please sign in or create an account.</p>
+    ? <Message>
+        <p>Please <Link to="/signin">sign in</Link> or <Link to="/signup">create a free account</Link> to use this feature.</p>
+      </Message>
     : 
     <>
       <Wrapper>
-        <Circle>
-          <Display>
-            {minutesPreset === "00" && secondsPreset === "00" ? minutesOpen : minutesPreset}:{minutesPreset === "00" && secondsPreset === "00" ? secondsOpen : secondsPreset}</Display>
-        </Circle>
-        <ComponentWrapper>
+        
+        {/* <ComponentWrapper> */}
           <PresetTimer />
+          <Circle>
+            <Display>
+              {minutesPreset === "00" && secondsPreset === "00" ? minutesOpen : minutesPreset}:{minutesPreset === "00" && secondsPreset === "00" ? secondsOpen : secondsPreset}</Display>
+          </Circle>
           <OpenTimer/>
-        </ComponentWrapper>
+        {/* </ComponentWrapper> */}
       </Wrapper>
     </>
     } 
@@ -35,11 +39,18 @@ const Meditation = () => {
   )
 };
 
+const Message = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 20vh;
+`
+
 const Wrapper = styled.div`
 display: flex;
-flex-direction: column;
-justify-content: space-evenly;
+justify-content: center;
 align-items: center;
+margin-top: 2rem;
 `
 const growShrink = keyframes`
 0% { transform: scale(1) }

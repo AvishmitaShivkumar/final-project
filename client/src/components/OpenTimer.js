@@ -49,7 +49,7 @@ const OpenTimer = () => {
     return(
         <>
         <Wrapper>
-            <p>Open-Ended Meditations</p>
+            <Title>Open-Ended Meditations</Title>
             <div>
                 <Button type="button" onClick={toggleTimer}>
                     {runOpen ? "Pause" : "Start"}
@@ -67,7 +67,12 @@ const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-margin: 2rem;
+justify-content: flex-start;
+width: 30vw;
+height: 30vh;
+`
+const Title = styled.p`
+margin: 1rem;
 `
 const Button = styled.button`
 border-radius: 0.4rem;

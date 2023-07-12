@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
 
 const Header = () => {
-    const { loggedInUser } = useContext(UserContext);
+    const { loggedInUser, setLoggedInUser} = useContext(UserContext);
 
+    const navigate = useNavigate();
 
     // assigning location variable for navigation.
     const location = useLocation();
@@ -17,6 +18,12 @@ const Header = () => {
     // split method to get the name of the path in array
     const splitLocation = pathname.split("/");
     
+    // logs the user out and naviagtes them to the homepage.
+    const handleSignOut = () => {
+        setLoggedInUser("")
+        navigate("/")
+    };
+
     return(
         <>
         <Container>
@@ -24,6 +31,8 @@ const Header = () => {
             {loggedInUser 
             ? <>
             <UserText>Welcome, {loggedInUser.name}.</UserText>
+            <Text>Stay as long as you'd like.</Text>
+            <SignOut onClick={handleSignOut}>SIGN OUT</SignOut>
             </>
             : <>
             <TextContainer>
@@ -50,7 +59,7 @@ display: flex;
 flex-direction: column;
 justify-content: flex-end;
 align-items: center;
-height: 43vh;
+height: 40vh;
 `
 const Title = styled(NavLink)`
 font-size: 6rem;
@@ -76,6 +85,13 @@ font-size: 1.1rem;
 const SigninNav = styled.li`
 margin: 1rem;
 font-weight: bold;
+padding-bottom: 0.2rem;
+
+&:hover{
+    cursor: pointer;
+    border-bottom: 0.2rem solid var(--color-accent);
+    padding: 0;
+}
 
 &.active {
 border-bottom: 0.2rem solid var(--color-accent);
@@ -85,4 +101,23 @@ const StyledLink = styled(Link)`
 text-decoration: none;
 color: var(--color-accent);
 `
+const SignOut = styled(Link)`
+color: var(--color-accent);
+margin: 1.5rem;
+font-size: 1.1rem;
+font-weight: bold;
+padding-bottom: 0.2rem;
+text-decoration: none;
+
+&:hover{
+    cursor: pointer;
+    border-bottom: 0.2rem solid var(--color-accent);
+    padding: 0;
+}
+
+&:active {
+    border-bottom: 0.2rem solid var(--color-accent);
+}
+`
+
 export default Header;

@@ -55,7 +55,7 @@ const handleSignUp = async (request, response) => {
         await db.collection("auth").insertOne({ _id: id, email, password: hashedPassword});
         
         // declares the body to be created for each new account in the accounts collection.
-        const newAccount = { _id: id, name, email, gratitudeLog: [], meditationLog: [] };
+        const newAccount = { _id: id, name, email };
 
         // adds a new document to the accounts collection.
         await db.collection("accounts").insertOne(newAccount);

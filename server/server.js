@@ -8,6 +8,7 @@ const getUserGratitude = require('./handlers/getUserGratitude');
 const addMeditation = require('./handlers/addMeditation');
 const editGratitude = require('./handlers/editGratitude');
 const deleteGratitude = require('./handlers/deleteGratitude');
+const getQuotes = require('./handlers/getQuotes');
 
 
 const app = express()
@@ -30,6 +31,8 @@ app.patch("/api/gratitude/edit", editGratitude)
 app.delete("/api/gratitude/delete", deleteGratitude)
 
 app.post("/api/meditation", addMeditation)
+
+app.get("/api/quote", getQuotes)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

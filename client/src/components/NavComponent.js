@@ -38,6 +38,12 @@ text-decoration: none;
 const Navigation = styled.li`
 margin: 1rem 6rem;
 font-weight: bold;
+padding-bottom: 0.2rem;
+
+&:hover{
+    border-bottom: 0.2rem solid var(--color-primary);   
+    padding: 0; 
+}
 
 &.active {
 border-bottom: 0.2rem solid var(--color-primary);

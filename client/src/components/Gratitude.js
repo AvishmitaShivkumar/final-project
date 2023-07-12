@@ -6,6 +6,7 @@ import styled from "styled-components";
 import GratitudeComponent from "./GratitudeComponent";
 import { TimerContext } from "./TimerContext";
 import { v4 as uuidv4 } from 'uuid';
+import { Link } from "react-router-dom";
 
 const Gratitude = () => {
     // generates a unique id.
@@ -17,12 +18,18 @@ const { formattedDate } = useContext(TimerContext);
 const [ gratitude, setGratitude ] = useState({date: formattedDate, id});
 const [ gotGratitude, setGotGratitude ] = useState("");
 
-// this state is used to trigger the GET request
+// any change in this state triggers the GET request
 const [ toGet, setToGet ] = useState(true);
+
+const [ loading, setLoading ] = useState(false);
 
 // stores user input from the form in a state variable
 const handleChange = (key, value) => {
     setGratitude({...gratitude, [key]: value});
+};
+
+const handleClick = () => {
+    gratitude.gratitude && setLoading(true);
 };
 
 const handleSubmit = (event) => {
@@ -54,19 +61,22 @@ useEffect(() => {
     .then(parsed => {
         if(parsed.status === 200){
             setGotGratitude(parsed.data.log)
+            setLoading(false)
         } else {
             setGotGratitude("")
+            setLoading(false)
         }
     })
 },[toGet]);
 
-console.log(gotGratitude)
 
 return(
     <>
     <NavComponent/>
     {!loggedInUser 
-    ? <p>Please sign in or create an account.</p>
+    ? <Message>
+        <p>Please <Link to="/signin">sign in</Link> or <Link to="/signup">create a free account</Link> to use this feature.</p>
+      </Message>
     :
     <Wrapper>
         <Flower src="/flower-transparent.png"/>
@@ -78,7 +88,7 @@ return(
             rows={5}
             onChange={(event) => handleChange(event.target.id, event.target.value)}
             />
-            <Button type="submit">Save</Button>
+            <Button type="submit" onClick={handleClick}>{loading ? "Saving" : "Save"}</Button>
             {
             gotGratitude &&
                 gotGratitude.filter((entry) => {
@@ -105,6 +115,12 @@ return(
 )
 };
 
+const Message = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 20vh;
+`
 const Wrapper = styled.div`
 display: flex;
 justify-content: center;

@@ -5,8 +5,9 @@ import { UserContext } from "./UserContext";
 
 const SignIn = () => {
     const { setLoggedInUser } = useContext(UserContext);
-    const [ formData, setFormData ] = useState({});
+    const [ formData, setFormData ] = useState("");
     const [ errorMessage, setErrorMessage ] = useState("");
+    const [ loading, setLoading ] = useState(false);
 
     const navigate = useNavigate();
 
@@ -15,31 +16,40 @@ const SignIn = () => {
     setFormData({...formData, [key]: value});
     };
 
+    const handleClick = () => {
+        // dictates whether the button says "Sign in" or  "Signing in"
+    formData && setLoading(true);
+    };
+
     const handleSubmit = (event) => {
     // prevent's form's default behaviour
         event.preventDefault();
-    
-    // fetches the user information or returns an error message if there is no account.
-    fetch("/api/signin", {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: formData.email, password: formData.password }),
-    })
-        .then(response => response.json())
-        .then(parsed => {
-            if(parsed.status === 200) {
-                setLoggedInUser(parsed.data)
-                navigate("/");
-            } else {
-                setErrorMessage(parsed.error);
-            }
+        
+
+        // fetches the user information or returns an error message if there is no account.
+        fetch("/api/signin", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: formData.email, password: formData.password }),
+        })
+            .then(response => response.json())
+            .then(parsed => {
+                if(parsed.status === 200) {
+                    setLoggedInUser(parsed.data)
+                    setLoading(false)
+                    navigate("/");
+                } else {
+                    setErrorMessage(parsed.error);
+                }
         })
 
-    // clear's the form
-    event.target.reset();
+        // clear's the form
+        event.target.reset();
+
+    
     }
 
     return(
@@ -47,7 +57,7 @@ const SignIn = () => {
         <Form onSubmit={handleSubmit}>
             <Input type="email" id="email" placeholder="Email" onChange={(event) => handleChange(event.target.id, event.target.value)}/>
             <Input type="password" id="password" placeholder="Password" onChange={(event) => handleChange(event.target.id, event.target.value)}/>
-            <Button>Sign in</Button>
+            <Button onClick={handleClick}>{loading ? "Signing in" : "Sign in"}</Button>
             {errorMessage &&
             <SignInError>{errorMessage}</SignInError>
             }

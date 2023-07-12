@@ -4,10 +4,11 @@ import styled from "styled-components";
 import { UserContext } from "./UserContext";
 
 const SignUp = () => {
-    const { setLoggedInUser } = useContext(UserContext);
+    const { loggedInUser, setLoggedInUser } = useContext(UserContext);
     const [ formData, setFormData ] = useState({});
     const [ errorMessage, setErrorMessage ] = useState("");
-
+    const [ loading, setLoading ] = useState(false);
+    
     const navigate = useNavigate();
 
     //  stores the user entered input values in a state
@@ -19,6 +20,13 @@ const SignUp = () => {
         setErrorMessage("")
         // prevent's form's default behaviour
         event.preventDefault();
+
+    // dictates whether the button says "Sign in" or  "Signing in"
+    if(!loggedInUser && formData) {
+        setLoading(true);
+    } else {
+        setLoading(false)
+    }
 
         // creates a new user in the database - POST
         fetch("/api/signup", {
@@ -49,12 +57,11 @@ const SignUp = () => {
         <Input type="text" id="name" placeholder="Full name" onChange={(event) => handleChange(event.target.id, event.target.value)}/>
         <Input type="email" id="email" placeholder="Email" onChange={(event) => handleChange(event.target.id, event.target.value)}/>
         <Input type="password" id="password" placeholder="Password" onChange={(event) => handleChange(event.target.id, event.target.value)}/>
-        <Button type="submit">Sign up</Button>
+        <Button type="submit">{loading ? "Signing up" : "Sign up"}</Button>
         {errorMessage &&
         <SignUpError>{errorMessage}</SignUpError>
         }
     </Form>
-    
     </>
     )
     };

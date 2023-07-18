@@ -89,9 +89,9 @@ return(
             onChange={(event) => handleChange(event.target.id, event.target.value)}
             />
             <Button type="submit" onClick={handleClick}>{loading ? "Saving" : "Save"}</Button>
-            {!gotGratitude 
-            ? <Loading/> 
-                : gotGratitude.filter((entry) => {
+            <SubTitle>I am grateful for: </SubTitle>
+            {gotGratitude &&
+                gotGratitude.filter((entry) => {
                     if(entry.date === formattedDate) {
                         return entry
                     }
@@ -193,6 +193,11 @@ box-shadow: rgba(100,79,68, 0.06) 0 2px 4px;
 color: rgba(0, 0, 0, 0.65);
 transform: translateY(0);
 }
+`
+const SubTitle = styled.p`
+font-size: 1.3rem;
+font-style: italic;
+margin: 1rem 0 0.5rem;
 `
 
 export default Gratitude;

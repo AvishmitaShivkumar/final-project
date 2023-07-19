@@ -14,6 +14,15 @@ const getQuotes = require('./handlers/getQuotes');
 const app = express()
 const port = 8002
 
+app.use((_req, res, next) => {
+  res.header("Access-Control-Allow-Origin", process.env.ALLOWED_ORIGIN);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Accept, Authorization",
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  next();
+})
 app.use(morgan("tiny"))
 app.use(express.json());
 

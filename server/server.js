@@ -43,6 +43,8 @@ app.post("/api/meditation", addMeditation)
 
 app.get("/api/quote", getQuotes)
 
+app.get("/hello", (_, res) => res.send("Hello from Grounded"))
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

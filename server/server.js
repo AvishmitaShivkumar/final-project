@@ -14,15 +14,17 @@ const getQuotes = require('./handlers/getQuotes');
 const app = express()
 const port = 8002
 
-app.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", process.env.ALLOWED_ORIGIN);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Accept, Authorization",
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+app.use((req, res, next) => {
+  const allowedOrigins = ["https://final-project-gray-five.vercel.app/", "http://localhost:3000"];
+  const origin = req.headers.origin;
+  if(allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Methods", "*");
   next();
-})
+  })
+
 app.use(morgan("tiny"))
 app.use(express.json());
 
@@ -43,6 +45,7 @@ app.post("/api/meditation", addMeditation)
 
 app.get("/api/quote", getQuotes)
 
+// for the render health check 
 app.get("/hello", (_, res) => res.send("Hello from Grounded"))
 
 app.listen(port, () => {

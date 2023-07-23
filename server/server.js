@@ -1,5 +1,5 @@
 const express = require('express');
-// const cors = require("cors");
+const cors = require("cors");
 const morgan = require('morgan');
 
 const handleSignIn = require('./handlers/handleSignIn');
@@ -15,19 +15,21 @@ const app = express()
 const port = 8002
 
 // // Handles cors error
-// app.use(cors())
+app.use(cors({
+  origin: "*"
+}));
 
-app.use(function (_req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Accept, Authorization",
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
-  next();
-})
+// app.use(function (_req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Content-Type, Accept, Authorization",
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+//   next();
+// })
 
-app.use(morgan("tiny"))
+app.use(morgan("tiny"));
 app.use(express.json());
 
 // Endpoints.

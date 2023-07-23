@@ -1,6 +1,6 @@
 const express = require('express');
-const cors = require("cors");
 const morgan = require('morgan');
+const cors = require("cors");
 
 const handleSignIn = require('./handlers/handleSignIn');
 const handleSignUp = require('./handlers/handleSignUp');
@@ -15,11 +15,13 @@ const app = express()
 const port = 8002
 
 // // Handles cors error
-app.use(cors({
-  origin: ["https://final-project-gray-five.vercel.app/", "http://localhost:3000"],
-  methods: ["GET", "POST", "UPDATE", "PUT", "PATCH", "DELETE"]
-}
-));
+app.use(cors());
+app.options("*", cors());
+// app.use(cors({
+//   origin: ["https://final-project-gray-five.vercel.app/", "http://localhost:3000"],
+//   methods: ["GET", "POST", "UPDATE", "PUT", "PATCH", "DELETE"]
+// }
+// ));
 
 // app.use(function (_req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");

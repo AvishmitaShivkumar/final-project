@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require("cors");
 const morgan = require('morgan');
 
 const handleSignIn = require('./handlers/handleSignIn');
@@ -10,20 +11,11 @@ const editGratitude = require('./handlers/editGratitude');
 const deleteGratitude = require('./handlers/deleteGratitude');
 const getQuotes = require('./handlers/getQuotes');
 
-
 const app = express()
 const port = 8002
 
-app.use((req, res, next) => {
-  const allowedOrigins = ["https://final-project-gray-five.vercel.app/", "http://localhost:3000"];
-  const origin = req.headers.origin;
-  if(allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Access-Control-Allow-Methods", "*");
-  next();
-  })
+// Handles cors error
+app.use(cors())
 
 app.use(morgan("tiny"))
 app.use(express.json());

@@ -16,7 +16,7 @@ const port = 8002
 
 // // Handles cors error
 app.use(cors());
-app.options("*", cors());
+// app.options("*", cors());
 // app.use(cors({
 //   origin: ["https://final-project-gray-five.vercel.app/", "http://localhost:3000"],
 //   methods: ["GET", "POST", "UPDATE", "PUT", "PATCH", "DELETE"]

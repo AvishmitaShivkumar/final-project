@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-// const cors = require("cors");
+const cors = require("cors");
 
 const handleSignIn = require('./handlers/handleSignIn');
 const handleSignUp = require('./handlers/handleSignUp');
@@ -15,7 +15,7 @@ const app = express()
 const port = 8000
 
 // // Handles cors error
-// app.use(cors());
+app.use(cors());
 // app.options("*", cors());
 // app.use(cors({
 //   origin: ["https://final-project-gray-five.vercel.app/", "http://localhost:3000"],
@@ -23,15 +23,15 @@ const port = 8000
 // }
 // ));
 
-app.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Accept, Authorization",
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
-  next();
-})
+// app.use((_req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Content-Type, Accept, Authorization",
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+//   next();
+// })
 
 app.use(morgan("tiny"));
 app.use(express.json());

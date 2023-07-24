@@ -1,5 +1,5 @@
 import moment from "moment";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const TimerContext = createContext(null);
 

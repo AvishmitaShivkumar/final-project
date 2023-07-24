@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../UserContext";
 import OpenTimer from "./OpenTimer";
 import PresetTimer from "./PresetTimer";

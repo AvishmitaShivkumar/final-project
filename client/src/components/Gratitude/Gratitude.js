@@ -6,7 +6,6 @@ import GratitudeComponent from "./GratitudeComponent";
 import { TimerContext } from "../TimerContext";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
-import Loading from "../Loading";
 
 const Gratitude = () => {
   // generates a unique id.

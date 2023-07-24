@@ -12,7 +12,7 @@ const deleteGratitude = require('./handlers/deleteGratitude');
 const getQuotes = require('./handlers/getQuotes');
 
 const app = express()
-const port = 8002
+const port = 8000
 
 // // Handles cors error
 app.use(cors());

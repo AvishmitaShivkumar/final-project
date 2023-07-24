@@ -37,7 +37,8 @@ app.use(morgan("tiny"));
 app.use(express.json());
 
 // Endpoints.
-app.post("/api/signin", handleSignIn)
+// app.post("/api/signin", handleSignIn)
+app.post("/api/signin", (request, response) => { response.status(200).json({message: "endpoint gets hit"})})
 
 app.post("/api/signup", handleSignUp)
 

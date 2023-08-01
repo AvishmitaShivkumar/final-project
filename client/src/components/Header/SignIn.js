@@ -20,13 +20,14 @@ const SignIn = () => {
     // dictates whether the button says "Sign in" or  "Signing in"
     formData && setLoading(true);
   };
-
+  
   const handleSubmit = (event) => {
     // prevent's form's default behaviour
     event.preventDefault();
 
     // fetches the user information or returns an error message if there is no account.
-    fetch(`${process.env.BACKEND_API_URL}/api/signin`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signin`, {
+      // fetch("https://grounded.onrender.com/api/signin", {
       method: "POST",
       headers: {
         Accept: "application/json",

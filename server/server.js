@@ -50,7 +50,7 @@ app.patch("/api/gratitude/edit", editGratitude)
 
 app.delete("/api/gratitude/delete", deleteGratitude)
 
-app.post(`${process.env.REACT_APP_BACKEND_URL}/api/meditation`, addMeditation)
+app.post("/api/meditation", addMeditation)
 
 app.get("/api/quote", getQuotes)
 

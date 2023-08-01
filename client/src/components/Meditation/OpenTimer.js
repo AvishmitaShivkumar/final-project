@@ -38,7 +38,6 @@ const OpenTimer = () => {
 
   // stops the timer and resets to the last chosen time.
   const stopTimer = () => {
-    console.log("timer being set");
     setCount(0);
     setRunOpen(false);
 

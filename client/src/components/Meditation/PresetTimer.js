@@ -42,7 +42,7 @@ const PresetTimer = () => {
       setCountDown(0);
 
       // The countdown time that was completed gets sent to the database.
-      fetch("/api/meditation", {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/meditation` , {
         method: "POST",
         headers: {
           Accept: "application/json",

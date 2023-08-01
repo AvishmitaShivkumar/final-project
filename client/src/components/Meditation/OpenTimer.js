@@ -43,7 +43,7 @@ const OpenTimer = () => {
     setRunOpen(false);
 
     // When user stops the timer, the time gets sent to the database.
-    fetch("/api/meditation", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/meditation`, {
       method: "POST",
       headers: {
         Accept: "application/json",

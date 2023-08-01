@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const cors = require("cors");
+const cors = require('cors');
 
 const handleSignIn = require('./handlers/handleSignIn');
 const handleSignUp = require('./handlers/handleSignUp');
@@ -14,7 +14,7 @@ const getQuotes = require('./handlers/getQuotes');
 const app = express()
 const port = 8000
 
-// // Handles cors error
+// Handles cors error with the cors package
 app.use(cors());
 // app.options("*", cors());
 // app.use(cors({
@@ -23,13 +23,14 @@ app.use(cors());
 // }
 // ));
 
+// Handles cors error with headers
 // app.use((_req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.header(
 //     "Access-Control-Allow-Headers",
 //     "Content-Type, Accept, Authorization",
 //   );
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, "UPDATE", "PUT", PATCH, DELETE");
 //   next();
 // })
 
@@ -37,8 +38,8 @@ app.use(morgan("tiny"));
 app.use(express.json());
 
 // Endpoints.
-// app.post("/api/signin", handleSignIn)
-app.post("/api/signin", () => {console.log("endpoint gets hit")})
+app.post("/api/signin", handleSignIn)
+// app.post("/api/signin", () => {console.log("endpoint gets hit")})
 
 app.post("/api/signup", handleSignUp)
 

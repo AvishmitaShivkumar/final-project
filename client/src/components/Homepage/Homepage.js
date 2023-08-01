@@ -10,7 +10,7 @@ const Homepage = () => {
   const [quotes, setQuotes] = useState("");
 
   useEffect(() => {
-    fetch("/api/quote")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/quote`)
       .then((response) => response.json())
       .then((parsed) => {
         setQuotes(parsed.data);

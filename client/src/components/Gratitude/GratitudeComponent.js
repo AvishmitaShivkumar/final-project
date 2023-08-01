@@ -26,7 +26,7 @@ const GratitudeComponent = ({ entry, toGet, setToGet }) => {
 
     replaceText.gratitude && setLoading(true);
     // sends the user's entry to the database
-    fetch("/api/gratitude/edit", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gratitude/edit`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -47,7 +47,7 @@ const GratitudeComponent = ({ entry, toGet, setToGet }) => {
     event.preventDefault();
 
     // deletes the user's entry.
-    fetch("/api/gratitude/delete", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gratitude/delete`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",

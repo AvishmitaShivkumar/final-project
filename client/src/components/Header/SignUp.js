@@ -29,7 +29,7 @@ const SignUp = () => {
     }
 
     // creates a new user in the database - POST
-    fetch("/api/signup", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",

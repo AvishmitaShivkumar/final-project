@@ -21,15 +21,12 @@ const SignIn = () => {
     formData && setLoading(true);
   };
 
-  console.log(process.env.REACT_APP_BACKEND_URL)
-  
   const handleSubmit = (event) => {
     // prevent's form's default behaviour
     event.preventDefault();
 
     // fetches the user information or returns an error message if there is no account.
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signin`, {
-      // fetch("https://grounded.onrender.com/api/signin", {
       method: "POST",
       headers: {
         Accept: "application/json",

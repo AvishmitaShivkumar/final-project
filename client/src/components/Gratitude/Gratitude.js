@@ -35,7 +35,7 @@ const Gratitude = () => {
     event.preventDefault();
 
     // sends the user's entry to the database
-    fetch("/api/gratitude", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gratitude `, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -59,7 +59,7 @@ const Gratitude = () => {
 
   // retrieves all the previous entries for the day for the logged in user.
   useEffect(() => {
-    fetch(`/api/gratitude/${loggedInUser._id}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gratitude/${loggedInUser._id}`)
       .then((response) => response.json())
       .then((parsed) => {
         if (parsed.status === 200) {

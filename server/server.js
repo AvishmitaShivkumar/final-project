@@ -39,7 +39,6 @@ app.use(express.json());
 
 // Endpoints.
 app.post("/api/signin", handleSignIn)
-// app.post("/api/signin", () => {console.log("endpoint gets hit")})
 
 app.post("/api/signup", handleSignUp)
 

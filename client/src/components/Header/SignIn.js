@@ -26,7 +26,7 @@ const SignIn = () => {
     event.preventDefault();
 
     // fetches the user information or returns an error message if there is no account.
-    fetch("/api/signin", {
+    fetch(`${process.env.BACKEND_API_URL}/api/signin`, {
       method: "POST",
       headers: {
         Accept: "application/json",

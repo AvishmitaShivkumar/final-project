@@ -21,7 +21,8 @@ const SignIn = () => {
     formData && setLoading(true);
   };
 
-  console.log(REACT_APP_BACKEND_URL)
+  console.log(process.env.REACT_APP_BACKEND_URL)
+  
   const handleSubmit = (event) => {
     // prevent's form's default behaviour
     event.preventDefault();

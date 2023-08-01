@@ -31,7 +31,6 @@ const getUserGratitude = async (request, response) => {
     } finally {
         // disconnects from Mongodb
         client.close()
-        console.log("disconnected")
     }
 };
 

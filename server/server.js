@@ -16,23 +16,6 @@ const port = 8000
 
 // Handles cors error with the cors package
 app.use(cors());
-// app.options("*", cors());
-// app.use(cors({
-//   origin: ["https://final-project-gray-five.vercel.app/", "http://localhost:3000"],
-//   methods: ["GET", "POST", "UPDATE", "PUT", "PATCH", "DELETE"]
-// }
-// ));
-
-// Handles cors error with headers
-// app.use((_req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, Accept, Authorization",
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET, POST, "UPDATE", "PUT", PATCH, DELETE");
-//   next();
-// })
 
 app.use(morgan("tiny"));
 app.use(express.json());

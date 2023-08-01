@@ -55,7 +55,6 @@ const GratitudeComponent = ({ entry, toGet, setToGet }) => {
       },
       body: JSON.stringify({ accountId: loggedInUser._id, log: entry }),
     });
-    console.log("deleted");
     setToGet(!toGet);
   };
 

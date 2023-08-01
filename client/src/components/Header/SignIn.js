@@ -20,7 +20,8 @@ const SignIn = () => {
     // dictates whether the button says "Sign in" or  "Signing in"
     formData && setLoading(true);
   };
-  
+
+  console.log(REACT_APP_BACKEND_URL)
   const handleSubmit = (event) => {
     // prevent's form's default behaviour
     event.preventDefault();

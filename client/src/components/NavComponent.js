@@ -33,6 +33,10 @@ justify-content: center;
 `
 const StyledLink = styled(Link)`
 text-decoration: none;
+
+@media screen and (max-width:800px) {
+    font-size: 1.3rem;
+}
 `
 
 const Navigation = styled.li`
@@ -47,6 +51,11 @@ padding-bottom: 0.2rem;
 
 &.active {
 border-bottom: 0.2rem solid var(--color-primary);
+}
+
+@media screen and (max-width: 800px) {
+    margin: 0.5rem
+    2rem;
 }
 `
 

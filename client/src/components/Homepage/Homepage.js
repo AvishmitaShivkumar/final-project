@@ -24,8 +24,8 @@ const Homepage = () => {
 
       {!loggedInUser ? (
         <Description>
-          <p>Grounded, very simply, gives you some help centering yourself. </p>
-          <p>Please sign in or create a free account </p>
+          <Text>Grounded, very simply, gives you some help centering yourself. </Text>
+          <Text>Please sign in or create a free account </Text>
         </Description>
       ) : !quotes ? (
         <Loading />
@@ -50,9 +50,17 @@ const QuoteWrapper = styled.div`
   margin: auto;
   text-align: center;
   margin-top: 4rem;
+
+  @media screen and (max-width:800px) {
+    margin-top: 1rem;
+  }
 `;
 const QuoteDetails = styled.p`
   margin: 2rem;
+
+  @media screen and (max-width:800px) {
+    font-size: 1.3rem;
+  }
 `;
 const Description = styled.div`
   display: flex;
@@ -61,6 +69,14 @@ const Description = styled.div`
   align-items: center;
   height: 10vh;
   margin: 2rem;
+
+  @media screen and (max-width: 800px) {
+    height: 20vh;
+    margin: 1rem 2rem;
+  }
+`;
+const Text = styled.p`
+font-size: 1.2rem;
 `;
 
 export default Homepage;

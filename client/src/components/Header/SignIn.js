@@ -88,7 +88,13 @@ const Form = styled.form`
   background: url("./container-background.png") no-repeat center;
   height: 20vh;
   padding: 10vh;
+  margin: 1rem 0;
   position: relative;
+  
+  @media screen and (max-width:800px) {
+    height: 30vh;
+  }
+
 `;
 const Input = styled.input`
   font-family: var(--body-font-family);
@@ -101,6 +107,10 @@ const Input = styled.input`
   &::placeholder {
     color: var(--color-accent);
     font-style: italic;
+  }
+
+  @media screen and (max-width:800px) {
+    width: 70vw;
   }
 `;
 const Button = styled.button`

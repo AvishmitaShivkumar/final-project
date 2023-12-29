@@ -4,7 +4,7 @@ const Breathe = () => {
   return (
   <Wrapper>
     <Circle>
-      <p>Breathe</p>
+      <Text>Breathe</Text>
     </Circle>
    </Wrapper>
   );
@@ -31,6 +31,17 @@ display: flex;
 justify-content: center;
 align-items: center;
 margin: 2rem;
+
+@media screen and (max-width:800px) {
+  height: 7rem;
+  width: 7rem;
+  margin: 1rem;
+}
+`
+const Text = styled.p`
+@media screen and (max-width:800px) {
+  font-size: 1.3rem;
+}
 `
 
 export default Breathe;

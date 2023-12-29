@@ -70,21 +70,41 @@ const Title = styled(NavLink)`
   font-family: var(--header-font-family);
   margin: 1rem;
   text-decoration: none;
-`;
-const Text = styled.p`
-  margin: 0.5rem;
-`;
-const UserText = styled(Text)`
-  color: var(--color-accent);
+
+  @media screen and (max-width: 800px) {
+    font-size: 3.5rem;
+    margin: 0.1rem;
+  }
+
 `;
 const TextContainer = styled.div`
   margin: 1rem;
   text-align: center;
+  
+  @media screen and (max-width: 800px) {
+    margin: 0.1rem;
+    font-size: 1.3rem;
+  }
 `;
+const Text = styled.p`
+  margin: 0.5rem;
+
+  @media screen and (max-width: 800px) {
+    font-size: 1.3rem;
+  }
+`;
+const UserText = styled(Text)`
+  color: var(--color-accent);
+`;
+
 const SigninContainer = styled.ul`
   display: flex;
   margin: 0.5rem;
   font-size: 1.1rem;
+
+  @media screen and (max-width: 800px) {
+    margin: 0.1rem;
+  }
 `;
 const SigninNav = styled.li`
   margin: 1rem;
@@ -104,6 +124,10 @@ const SigninNav = styled.li`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: var(--color-accent);
+
+  @media screen and (max-width: 800px) {
+    font-size: 1rem;
+  }
 `;
 const SignOut = styled(Link)`
   color: var(--color-accent);
@@ -121,6 +145,10 @@ const SignOut = styled(Link)`
 
   &:active {
     border-bottom: 0.2rem solid var(--color-accent);
+  }
+
+  @media screen and (max-width: 800px) {
+    font-size: 1rem;
   }
 `;
 

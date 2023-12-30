@@ -102,18 +102,37 @@ const Wrapper = styled.div`
   justify-content: space-between;
   width: 30vw;
   height: 30vh;
+
+  @media screen and (max-width:800px) {
+    width: 70vw;
+    height: auto;
+    margin: 1rem;
+  }
 `;
 const Title = styled.p`
   margin: 1rem;
+
+  @media screen and (max-width:800px) {
+    font-size: 1.3rem;
+  }
 `;
 const Text = styled.p`
   font-size: 1.3rem;
   margin-top: 1rem;
   text-align: center;
+
+  @media screen and (max-width:800px) {
+    font-size: 1.1rem;
+  }
 `;
 const Times = styled.div`
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width:800px) {
+    width: 70vw;
+    flex-wrap: wrap;
+  }
 `;
 const Button = styled.button`
   border-radius: 0.4rem;
@@ -146,6 +165,10 @@ const Button = styled.button`
     box-shadow: rgba(100, 79, 68, 0.06) 0 2px 4px;
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
+  }
+
+  @media screen and (max-width:800px) {
+    font-size: 1rem;
   }
 `;
 

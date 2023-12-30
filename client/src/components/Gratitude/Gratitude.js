@@ -77,10 +77,10 @@ const Gratitude = () => {
       <NavComponent />
       {!loggedInUser ? (
         <Message>
-          <p>
+          <Text>
             Please <Link to="/signin">sign in</Link> or{" "}
             <Link to="/signup">create a free account</Link> to use this feature.
-          </p>
+          </Text>
         </Message>
       ) : (
         <Wrapper>
@@ -131,7 +131,16 @@ const Message = styled.div`
   justify-content: center;
   align-items: center;
   height: 20vh;
+
+  @media screen and (max-width: 800px) {
+    font-size: 1.1rem;
+}
 `;
+const Text = styled.p`
+  @media screen and (max-width: 800px) {
+    width: 70vw;
+}
+`
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -143,12 +152,21 @@ const Flower = styled.img`
   object-fit: cover;
   margin: 2rem;
   overflow: visible;
+
+  @media screen and (max-width: 800px) {
+    margin: 2rem 3rem 0.3rem 0.3rem;
+}
 `;
 const GratitudeForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 25vw;
   margin: 2rem 0;
+
+  @media screen and (max-width: 800px) {
+    width: 50vw;
+    font-size: 1.3rem;
+  }
 `;
 const Date = styled.p`
   padding-bottom: 0.3rem;
@@ -209,6 +227,13 @@ const SubTitle = styled.p`
   font-size: 1.3rem;
   font-style: italic;
   margin: 1rem 0 0.5rem;
+
+  @media screen and (max-width:800px) {
+    font-variant: small-caps;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
 `;
 
 export default Gratitude;

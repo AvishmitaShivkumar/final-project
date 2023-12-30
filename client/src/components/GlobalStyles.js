@@ -45,7 +45,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 	background-image: var(--bg-image)  ;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
     height: 100vh;
 	font-size: 1.5rem;

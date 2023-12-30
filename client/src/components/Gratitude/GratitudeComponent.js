@@ -60,7 +60,7 @@ const GratitudeComponent = ({ entry, toGet, setToGet }) => {
 
   return !editting ? (
     <Wrapper>
-      <p>{entry.gratitude}</p>
+      <Text>{entry.gratitude}</Text>
       <div>
         <Button
           type="button"
@@ -71,7 +71,7 @@ const GratitudeComponent = ({ entry, toGet, setToGet }) => {
           <Edit />
         </Button>
         <Button type="button" onClick={handleDelete}>
-          <CiTrash />
+          <Trash />
         </Button>
       </div>
     </Wrapper>
@@ -83,7 +83,7 @@ const GratitudeComponent = ({ entry, toGet, setToGet }) => {
         placeholder="Enter your changes."
         onChange={(event) => handleInput(event.target.id, event.target.value)}
       />
-      <Wrapper>
+      <SaveCancelWrapper>
         <Button type="button" onClick={handleSave}>
           {loading ? "Saving" : "Save"}
         </Button>
@@ -95,17 +95,42 @@ const GratitudeComponent = ({ entry, toGet, setToGet }) => {
         >
           <MdCancel />
         </CancelButton>
-      </Wrapper>
+      </SaveCancelWrapper>
     </Wrapper>
   );
 };
 
-const Edit = styled(CiEdit)``;
+const Text = styled.p`
+@media screen and (max-width: 800px) {
+  font-size: 1.2rem;
+}
+`
+const Edit = styled(CiEdit)`
+@media screen and (max-width: 800px) {
+  font-size: 1rem;
+}
+`
+const Trash = styled(CiTrash)`
+@media screen and (max-width: 800px) {
+  font-size: 1rem;
+}
+`
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 800px) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 `;
+const SaveCancelWrapper = styled.div`
+ display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
 const Input = styled.input`
   background: transparent;
   border: 0.1rem solid var(--color-primary);
@@ -119,6 +144,14 @@ const Input = styled.input`
   &::placeholder {
     color: rgba(100, 79, 68, 0.7);
     font-size: 1.2rem;
+
+    @media screen and (max-width: 800px) {
+    font-size: 1rem;
+  }
+  }
+  
+  @media screen and (max-width: 800px) {
+    width: 50vw;
   }
 `;
 const Button = styled.button`
@@ -151,6 +184,11 @@ const Button = styled.button`
     box-shadow: rgba(100, 79, 68, 0.06) 0 2px 4px;
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
+  }
+
+  @media screen and (max-width: 800px) {
+    font-size: 1rem;
+    margin-top: 0.4rem;
   }
 `;
 const CancelButton = styled(Button)`

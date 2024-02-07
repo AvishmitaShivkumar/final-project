@@ -11,3 +11,6 @@ Grounded is a website that combines meditation timers and a gratitude log in one
 
 3. Gratitude entries are sent to the database when the "save" button is clicked, and are displayed on the page. Each entry can further be edited or deleted. 
 
+
+Credit: 
+Favicon image - gratitude by Flatart from <a href="https://thenounproject.com/browse/icons/term/gratitude/" target="_blank" title="gratitude Icons">Noun Project</a> (CC BY 3.0)
